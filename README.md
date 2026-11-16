@@ -1,5 +1,7 @@
 # Ring Cut
 
+<img src="docs/launcher-icon.png" alt="Ring Cut icon in the launcher" width="400">
+
 Android app that declines an incoming call when it is still ringing after N seconds. The network
 treats a declined call as busy, so "forward when busy" sends it on, for example to voicemail or an
 AI call assistant.
