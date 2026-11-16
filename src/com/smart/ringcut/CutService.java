@@ -25,8 +25,9 @@ import java.util.Map;
 public class CutService extends InCallService {
     static volatile boolean bound;
     static final ArrayDeque<String> LOG = new ArrayDeque<>();
-    // Must stay under the network's own unanswered limit (about 30 s in India), or the call ends unforwarded.
-    static final int MIN_SEC = 5, MAX_SEC = 60, DEFAULT_SEC = 25;
+    // Must stay under the network's own unanswered limit, or the call ends unforwarded. Jio (2026-11-16):
+    // the network ended the ring after 29.7 s, so 30 s never declined; 29 s declined and was forwarded.
+    static final int MIN_SEC = 5, MAX_SEC = 29, DEFAULT_SEC = 25;
 
     private final Handler h = new Handler(Looper.getMainLooper());
     private final Map<Call, Runnable> pending = new HashMap<>();

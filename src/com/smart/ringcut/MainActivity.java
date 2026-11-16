@@ -22,7 +22,8 @@ public class MainActivity extends Activity {
     /** adb: am start -n com.smart.ringcut/.MainActivity --ei sec 30 [--ez on true] */
     private void applyExtras(Intent i) {
         SharedPreferences.Editor e = getSharedPreferences("p", MODE_PRIVATE).edit();
-        if (i.hasExtra("sec")) e.putInt("sec", i.getIntExtra("sec", CutService.DEFAULT_SEC));
+        if (i.hasExtra("sec")) e.putInt("sec", Math.max(CutService.MIN_SEC,
+                Math.min(CutService.MAX_SEC, i.getIntExtra("sec", CutService.DEFAULT_SEC))));
         if (i.hasExtra("on")) e.putBoolean("on", i.getBooleanExtra("on", true));
         e.commit();
         if (sec != null) sec.setValue(CutService.seconds(this));
@@ -61,7 +62,7 @@ public class MainActivity extends Activity {
 
         TextView label = new TextView(this);
         label.setTextSize(15);
-        label.setText("Ring time (seconds). Keep it under your network's unanswered limit (about 30 s):");
+        label.setText("Ring time (seconds). The maximum is 29, because the network ends unanswered calls at about 30 s:");
         col.addView(label);
 
         sec = new NumberPicker(this);

@@ -19,10 +19,10 @@ but the network still forwards after about 15 s. With Ring Cut, you choose the r
 4. In the Google Phone app, set "forward when busy" (`**67*<number>#`). Then turn off "forward when
    unanswered" (`#61#`), or the network forwards first. Some dialers, such as Truecaller, do not
    run these codes.
-5. Open Ring Cut and pick the ring time (5–60 s).
+5. Open Ring Cut and pick the ring time (5–29 s).
 
-Keep the ring time under your network's limit for unanswered calls. On Jio, that limit is about
-30 s: 30 s failed and 29 s worked.
+The maximum is 29 s because the network ends unanswered calls at about 30 s. On Jio, the ring
+ended after 29.7 s, so 30 s never declined, and 29 s worked.
 
 To set it from adb: `adb shell am start -n com.smart.ringcut/.MainActivity --ei sec 28 --ez on true`
 
